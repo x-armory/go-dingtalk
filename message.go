@@ -4,11 +4,10 @@ import (
 	"bytes"
 	"encoding/json"
 	"io/ioutil"
-	"log"
-	"pauljiang/utils/rpc"
+	"net/http"
 )
 
-const send_url = "https://oapi.dingtalk.com/robot/send?access_token="
+const sendUrl = "https://oapi.dingtalk.com/robot/send?access_token="
 
 /**
 钉钉markdown支持的格式
@@ -41,34 +40,33 @@ const send_url = "https://oapi.dingtalk.com/robot/send?access_token="
 有序列表
 1. item1
 2. item2
- */
+*/
 func (msg *Message) Send() (*MessageResp, error) {
 	marshal, err := json.Marshal(msg)
 	if err != nil {
 		return nil, err
 	}
-	log.Println("[Send Message]", string(marshal))
-	resp, err := rpc.HttpClient.HttpClient.Post(send_url+msg.AccessToken, "application/json", bytes.NewReader(marshal))
+	resp, err := http.DefaultClient.Post(sendUrl+msg.AccessToken, "application/json", bytes.NewReader(marshal))
 	if err != nil {
 		return nil, err
 	}
 	defer resp.Body.Close()
 	body, _ := ioutil.ReadAll(resp.Body)
-	log.Println(string(body))
+
 	messageResp := MessageResp{}
 	json.Unmarshal(body, &messageResp)
 	return &messageResp, nil
 }
 
 type Message struct {
-	AccessToken string               `json:"-"`
-	Msgtype     MessageType          `json:"msgtype"`
-	Text        *TextMessage         `json:"text"`
-	Link        *LinkMessage         `json:"link"`
-	Markdown    *MarkdownMessage     `json:"markdown"`
-	ActionCard  *ActionCardMessage   `json:"actionCard"`
-	FeedCard    *FeedCardMessage `json:"feedCard"`
-	At          *MessageAt           `json:"at"`
+	AccessToken string             `json:"-"`
+	Msgtype     MessageType        `json:"msgtype"`
+	Text        *TextMessage       `json:"text"`
+	Link        *LinkMessage       `json:"link"`
+	Markdown    *MarkdownMessage   `json:"markdown"`
+	ActionCard  *ActionCardMessage `json:"actionCard"`
+	FeedCard    *FeedCardMessage   `json:"feedCard"`
+	At          *MessageAt         `json:"at"`
 }
 
 type MessageType string
@@ -98,12 +96,12 @@ type MarkdownMessage struct {
 }
 
 type ActionCardMessage struct {
-	Title          string                  `json:"title"`
-	Text           string                  `json:"text"`
-	HideAvatar     string                  `json:"hideAvatar"`
-	BtnOrientation string                  `json:"btnOrientation"`
-	SingleTitle    string                  `json:"singleTitle"`
-	SingleURL      string                  `json:"singleURL"`
+	Title          string                   `json:"title"`
+	Text           string                   `json:"text"`
+	HideAvatar     string                   `json:"hideAvatar"`
+	BtnOrientation string                   `json:"btnOrientation"`
+	SingleTitle    string                   `json:"singleTitle"`
+	SingleURL      string                   `json:"singleURL"`
 	Btns           *[]*ActionCardMessageBtn `json:"btns"`
 }
 

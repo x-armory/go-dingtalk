@@ -7,7 +7,7 @@ import (
 
 func TestTextMessage(t *testing.T) {
 	msg := Message{
-		AccessToken: "cec09236b23441bffbdb022fbb479431fc0deb676156590f58ca66ee4cb8b93d",
+		AccessToken: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
 		Msgtype:     TEXT,
 		Text: &TextMessage{
 			Content: "Text Message Content",
@@ -19,7 +19,7 @@ func TestTextMessage(t *testing.T) {
 
 func TestLinkMessage(t *testing.T) {
 	msg := Message{
-		AccessToken: "cec09236b23441bffbdb022fbb479431fc0deb676156590f58ca66ee4cb8b93d",
+		AccessToken: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
 		Msgtype:     LINK,
 		Link: &LinkMessage{
 			Title:      "title",
@@ -34,7 +34,7 @@ func TestLinkMessage(t *testing.T) {
 
 func TestMarkdownMessage(t *testing.T) {
 	msg := Message{
-		AccessToken: "cec09236b23441bffbdb022fbb479431fc0deb676156590f58ca66ee4cb8b93d",
+		AccessToken: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
 		Msgtype:     MARKDOWN,
 		Markdown: &MarkdownMessage{
 			Title: "title",
@@ -52,7 +52,7 @@ func TestMarkdownMessage(t *testing.T) {
 }
 func TestMultiActionCardMessage(t *testing.T) {
 	msg := Message{
-		AccessToken: "cec09236b23441bffbdb022fbb479431fc0deb676156590f58ca66ee4cb8b93d",
+		AccessToken: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
 		Msgtype:     ActionCard,
 		ActionCard: &ActionCardMessage{
 			Title: "乔布斯 20 年前想打造一间苹果咖啡厅，而它正是 Apple Store 的前身",
@@ -83,7 +83,7 @@ func TestMultiActionCardMessage(t *testing.T) {
 
 func TestSingleActionCardMessage(t *testing.T) {
 	msg := Message{
-		AccessToken: "cec09236b23441bffbdb022fbb479431fc0deb676156590f58ca66ee4cb8b93d",
+		AccessToken: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
 		Msgtype:     ActionCard,
 		ActionCard: &ActionCardMessage{
 			Title: "乔布斯 20 年前想打造一间苹果咖啡厅，而它正是 Apple Store 的前身",
@@ -100,10 +100,9 @@ func TestSingleActionCardMessage(t *testing.T) {
 	msg.Send()
 }
 
-
 func TestFeedCardMessage(t *testing.T) {
 	msg := Message{
-		AccessToken: "cec09236b23441bffbdb022fbb479431fc0deb676156590f58ca66ee4cb8b93d",
+		AccessToken: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
 		Msgtype:     FeedCard,
 		FeedCard: &FeedCardMessage{
 			Links: &[]*FeedCardLinkMessage{
