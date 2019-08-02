@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
+	"os"
 )
 
 const sendUrl = "https://oapi.dingtalk.com/robot/send?access_token="
@@ -42,11 +43,16 @@ const sendUrl = "https://oapi.dingtalk.com/robot/send?access_token="
 2. item2
 */
 
+const EnvXArmoryIgnoreSendDingTalk = "X_ARMORY_IGNORE_SEND_DING_TALK"
+
 type Util struct {
 	AccessToken string
 }
 
 func (u *Util) SendText(t string) {
+	if os.Getenv(EnvXArmoryIgnoreSendDingTalk) == "true" {
+		return
+	}
 	msg := Message{
 		AccessToken: u.AccessToken,
 		Msgtype:     TEXT,
