@@ -41,6 +41,23 @@ const sendUrl = "https://oapi.dingtalk.com/robot/send?access_token="
 1. item1
 2. item2
 */
+
+type Util struct {
+	AccessToken string
+}
+
+func (u *Util) SendText(t string) {
+	msg := Message{
+		AccessToken: u.AccessToken,
+		Msgtype:     TEXT,
+		Text: &TextMessage{
+			Content: t,
+		},
+	}
+
+	msg.Send()
+}
+
 func (msg *Message) Send() (*MessageResp, error) {
 	marshal, err := json.Marshal(msg)
 	if err != nil {
